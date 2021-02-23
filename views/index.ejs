@@ -6,41 +6,50 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <form method="POST" action="/done">
-      <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Task</th>
-                <th>Done?</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% let counter = 0 %>
-            <% list.forEach(item => { %>
-                <% counter ++ %>
-                <tr>
-                    <td><%= counter %></td>
-                    <td><%= item.description %></td>
-                    <td><input 
-                      type="submit" 
-                      value="<%= item.done %>"
-                      name="<% item.id %>"
-                    ></td>
-                    <td><a
-                      href="/delete/<%= item.id %>"
-                    >X</a></td>
-                </tr>
-            <% }) %>
-        </tbody>
-      </table>
-    </form>
+    <table>
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Task</th>
+              <th>Done?</th>
+              <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% let counter = 0 %>
+          <% list.forEach(item => { %>
+              <% counter ++ %>
+              <tr>
+                  <td><%= counter %></td>
+                  <td><%= item.description %></td>
+                  <td><a 
+                    href="/done/<%= item.id %>" 
+                    class="button 
+                    <% if (item.done) { %>
+                      green
+                    <% } %>
+                    ">
+                    <% if (item.done) { %>
+                      Yes
+                    <% } else { %>
+                      No
+                    <% } %>
+                  </a></td>
+                  <td><a
+                    class="button"
+                    href="/delete/<%= item.id %>"
+                  >X</a></td>
+              </tr>
+          <% }) %>
+      </tbody>
+    </table>
+    <div class="button_wrapper">
+      <a class="button large" href="/edit">Edit list</a>
+    </div>
     <div>
-      <a href="/edit">Edit list</a>
       <form method="POST" action="/">
         <input type="text" name="item_text">
-        <input type="submit" value="Add item">
+        <input class="button large" type="submit" value="Add item">
       </form>
     </div>
   </body>

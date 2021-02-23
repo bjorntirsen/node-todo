@@ -9,10 +9,9 @@ router.get("/delete/:id", (req, res, next) => {
     for (let i=0; i< req.session.tasks.length; i++) {
         if (id == req.session.tasks[i].id) {
             req.session.tasks.splice(i, 1)
-            console.log({status: 'Success', message : 'Entry deleted'})
+            console.log(`Entry id: ${req.params.id} deleted.`)
         }
     }
-    console.log(req.params.id)
 
     // Write response
     res.redirect('/');
