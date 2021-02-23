@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+    <h1><%= title %></h1>
+    <form method="POST" action="/edit">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Id</th>
+                    <th>Task</th>
+                    <th>Done?</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% let counter = 0 %>
+                <% list.forEach(item => { %>
+                    <% counter ++ %>
+                    <tr>
+                        <td><%= counter %></td>
+                        <td><%= item.id %></td>
+                        <td><input 
+                            type="text" 
+                            value="<%= item.description %>"
+                            name="description">
+                        </td>
+                        <td><input 
+                        type="submit" 
+                        value="<%= item.done %>"
+                        name="<% item.id %>"
+                        ></td>
+                        <td><a
+                        href="/delete/<%= item.id %>"
+                        >X</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <div>
+            <input type="submit" value="Save changes">
+        </div>
+    </form>
+</body>
+</html>
